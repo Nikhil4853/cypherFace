@@ -7,6 +7,9 @@ const UserModel = require('../models/user.model');
 
 class User {
     static async register(req, res) {
+                     /*
+* #swagger.tags = ['authRoute']
+*/
         try {
             const { firstname, email, Password, lastname, phone, profileImgURL } = req.body;
 

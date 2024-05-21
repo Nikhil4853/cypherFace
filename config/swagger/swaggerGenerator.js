@@ -7,4 +7,6 @@ const endpointsFiles = ['./src/routes/authRoutes.js',
     './src/routes/imageRoutes.js',
     './src/routes/plaidRoutes.js']
 
-swaggerAutogen(outputFile, endpointsFiles, swaggerConfig)
+swaggerAutogen(outputFile, endpointsFiles, swaggerConfig).then(() => {
+    require('../../../src-backend/app.js'); // Your project's root file
+  });

@@ -9,14 +9,16 @@ const imageModel = require('../models/image.model');
 
 
 
-// Upload function for image
+
 const uploadImage = async (req, res) => {
+
     try {
         if (!req.file) {
             return res.status(400).send('No file uploaded.');
         }
 
-        const { userId } = req.params;
+        const { userId } = req.body;
+;
         if (!userId) {
             return res.status(400).send('User ID is required.');
         }
@@ -36,15 +38,16 @@ const uploadImage = async (req, res) => {
 };
 
 // Update function for image
+
 const editImage = async (req, res) => {
     try {
-        console.log(req.body)
+     
         const { userId } = req.params;
         if (!userId) {
             return res.status(400).send('User ID is required.');
         }
 
-        const user = await UserModel.findById(userId);
+        const user = await   imageModel.findById(req.params.userId);
         if (!user) {
             return res.status(404).send('User not found.');
         }
@@ -63,8 +66,10 @@ const editImage = async (req, res) => {
 };
 
 const getImage=async (req, res) => {
-console.log(req.params.userId)
-    imageModel.findById(req.params.userId)
+
+    imageModel.findOne(
+        {userId:req.params.userId}
+    )
         .then(image => {
             if (!image) {
                 return res.status(404).json({ error: 'Image not found' });
